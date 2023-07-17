@@ -2,7 +2,7 @@ import { GlobalManager } from './GlobalManager.js';
 import { MensagemManager } from './MensagemManager.js';
 import { Jogador } from '../model/Jogador.js';
 
-class MainManager {
+export class MainManager {
 	constructor() {
 		this.globalManager = GlobalManager.getInstance();
 		this.mensagemManager = MensagemManager.getInstance();
@@ -53,5 +53,4 @@ class MainManager {
 	}
 }
 
-const mainManager = MainManager.getInstance();
-mainManager.novaConexao(`ws://${location.host}`);
+MainManager.getInstance().novaConexao(`ws://${location.host}`);

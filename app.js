@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile('view/MainView.html', { root: 'public' });
+  res.sendFile('index.html', { root: 'public' });
 });
 
 app.get('*', (req, res) => {
