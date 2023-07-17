@@ -2,7 +2,7 @@ import { Jogador } from '../model/Jogador.js';
 
 export class GlobalManager {
 	constructor() {
-		this.jogadores = [];
+		this.jogador = new Jogador();
 	}
 
 	static getInstance() {
@@ -12,11 +12,12 @@ export class GlobalManager {
 		return GlobalManager.instance;
 	}
 
-	addJogador(jogador) {
-		this.jogadores[jogador.ws] = jogador;
+	addWs(ws) {
+		this.jogador.ws = ws;
 	}
 
-	delJogador(jogador) {
-		delete this.jogadores[jogador.ws];
+	attJogador(jogador) {
+		jogador.ws = this.jogador.ws;
+		this.jogador = jogador;
 	}
 }

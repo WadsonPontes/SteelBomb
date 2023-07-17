@@ -1,8 +1,8 @@
-const GlobalManager = require('./GlobalManager');
-const MensagemManager = require('./MensagemManager');
-const Jogador = require('../model/Jogador');
+import { GlobalManager } from './GlobalManager.js';
+import { MensagemManager } from './MensagemManager.js';
+import { Jogador } from '../model/Jogador.js';
 
-class MainManager {
+export class MainManager {
 	constructor() {
 		this.globalManager = GlobalManager.getInstance();
 		this.mensagemManager = MensagemManager.getInstance();
@@ -19,11 +19,12 @@ class MainManager {
 		const jogador = new Jogador(ws);
 
 		ws.on('message', raw => this.novaMensagem(jogador, raw));
-		ws.on('error', erro => this.erroConexao(jogador, erro));
 		ws.on('close', (id, descricao) => this.fechadaConexao(jogador, id, descricao));
+		ws.on('error', erro => this.erroConexao(jogador, erro));
 
 		this.globalManager.addJogador(jogador);
-		this.mensagemManager.enviar('mainController', 'novaConexao', jogador);
+		this.mensagemManager.enviar('mainManager', 'sucessoConexao', jogador);
+		console.log(`Nova conexão: ${jogador.nome}`);
 	}
 
 	novaMensagem(jogador, raw) {
@@ -37,11 +38,6 @@ class MainManager {
 		}
 	}
 
-	erroConexao(jogador, erro) {
-		this.globalManager.delJogador(jogador);
-		console.error(`[${jogador.nome}] Erro na conexão: ${erro.message}`);
-	}
-
 	fechadaConexao(jogador, id, descricao) {
 		this.globalManager.delJogador(jogador);
 
@@ -53,9 +49,12 @@ class MainManager {
 		}
 	}
 
+	erroConexao(jogador, erro) {
+		this.globalManager.delJogador(jogador);
+		console.error(`[${jogador.nome}] Erro na conexão: ${erro.message}`);
+	}
+
 	validarDados(dados) {
 		return true;
 	}
 }
-
-module.exports = MainManager;

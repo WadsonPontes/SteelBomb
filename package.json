@@ -1,5 +1,6 @@
 {
   "name": "SteelBomb",
+  "type": "module",
   "version": "1.0.0",
   "description": "Jogo de tanque de guerra",
   "main": "app.js",
