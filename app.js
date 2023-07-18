@@ -2,8 +2,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { WebSocketServer } from 'ws';
-
-
 import { MainManager } from './server/manager/MainManager.js';
 
 const app = express();

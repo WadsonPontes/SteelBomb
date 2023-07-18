@@ -12,7 +12,7 @@ export class EventoManager {
 		GlobalManager.canvas.height = window.innerHeight;
 	}
 
-	static clicouTela() {
-		console.log('clicou na tela');
+	static clicouTela(event) {
+		GlobalManager.tela.clicou(event);
 	}
 }
