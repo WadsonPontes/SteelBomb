@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
   res.redirect('/');
 });
  
-const server = app.listen(process.env.PORT || 3000, () => console.log('Servidor online!'));
+const server = app.listen(process.env.PORT || 4200, () => console.log('Servidor online!'));
 const wss = new WebSocketServer({ server });
 
 wss.on('connection', (sock, req) => MainManager.getInstance().novaConexao(sock, req));

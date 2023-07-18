@@ -1,45 +1,37 @@
 import { GlobalManager } from './GlobalManager.js';
 import { MensagemManager } from './MensagemManager.js';
-import { Jogador } from '../model/Jogador.js';
+import { EventoManager } from './EventoManager.js';
 
 export class MainManager {
-	constructor() {
-		this.globalManager = GlobalManager.getInstance();
-		this.mensagemManager = MensagemManager.getInstance();
-	}
-
-	static getInstance() {
-		if (!MainManager.instance) {
-			MainManager.instance = new MainManager();
-		}
-		return MainManager.instance;
-	}
-
-	novaConexao(url) {
+	static novaConexao(url) {
 		const ws = new WebSocket(url);
-		this.globalManager.addWs(ws);
 
-		ws.onmessage = (raw) => this.novaMensagem(raw);
-		ws.onclose = (id, descricao) => this.fechadaConexao(id, descricao);
-		ws.onerror = (erro) => this.erroConexao(erro);
+		GlobalManager.iniciar();
+		EventoManager.iniciar();
+		GlobalManager.addWs(ws);
+
+		ws.onmessage = (raw) => MainManager.novaMensagem(raw);
+		ws.onclose = (id, descricao) => MainManager.fechadaConexao(id, descricao);
+		ws.onerror = (erro) => MainManager.erroConexao(erro);
 	}
 
-	sucessoConexao(jogador) {
-		this.globalManager.attJogador(jogador);
+	static sucessoConexao(jogador) {
+		GlobalManager.attJogador(jogador);
+		MainManager.iniciarJogo();
 	}
 
-	novaMensagem(raw) {
+	static novaMensagem(raw) {
 		const dados = JSON.parse(raw.data);
 
 		if (dados.controller == 'mainManager') {
-			this[dados.metodo](dados.jogador, dados.dados);
+			MainManager[dados.metodo](dados.jogador, dados.dados);
 		}
 		else {
 			this[dados.controller][dados.metodo](dados.jogador, dados.dados);
 		}
 	}
 
-	fechadaConexao(id, descricao) {
+	static fechadaConexao(id, descricao) {
 		if (id == 1001) {
 			console.error(`Conexão fechada: ${id} - ${descricao}`);
 		}
@@ -48,9 +40,19 @@ export class MainManager {
 		}
 	}
 
-	erroConexao(erro) {
+	static erroConexao(erro) {
 		console.error(`Erro na conexão: ${erro.message}`);
+	}
+
+	static iniciarJogo() {
+		MainManager.runJogo();
+	}
+
+	static runJogo() {
+		GlobalManager.limparTela();
+		GlobalManager.desenhar();
+		window.requestAnimationFrame(MainManager.runJogo);
 	}
 }
 
-MainManager.getInstance().novaConexao(`ws://${location.host}`);
+MainManager.novaConexao(`ws://${location.host}`);
