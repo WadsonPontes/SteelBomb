@@ -37,23 +37,25 @@ export class JogoRapidoController {
 		const key = dados.dados;
 		
 		if (key == 'w' || key == 'ArrowUp') {
-			personagem.y -= 10;
+			personagem.y -= 15;
 			personagem.angulo = 0;
 		}
 		if (key == 'd' || key == 'ArrowRight') {
-			personagem.x += 10;
+			personagem.x += 15;
 			personagem.angulo = 90;
 		}
 		if (key == 's' || key == 'ArrowDown') {
-			personagem.y += 10;
+			personagem.y += 15;
 			personagem.angulo = 180;
 		}
 		if (key == 'a' || key == 'ArrowLeft') {
-			personagem.x -= 10;
+			personagem.x -= 15;
 			personagem.angulo = -90;
 		}
 		if (key == ' ' || key == 'Enter') {
-			personagem.atirar();
+			if (Date.now() - personagem.ultimo_tiro > 300) {
+				personagem.atirar();
+			}
 		}
 
 		MensagemManager.enviarAll('jogoRapidoController', 'atualizacao', GlobalManager.partidas[jogador.idpartida]);

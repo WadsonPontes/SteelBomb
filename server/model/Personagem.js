@@ -16,10 +16,12 @@ export class Personagem {
         this.vida_max = 100;
         this.vida_atual = 100;
 		this.dano = 10;
+		this.ultimo_tiro = Date.now();
 		this.estado = Estado.INICIAL;
 	}
 
 	atirar() {
+		this.ultimo_tiro = Date.now();
 		const tiro = new Tiro(this.idjogador, this.idpartida, this.x, this.y, this.angulo, this.dano);
 		GlobalManager.partidas[this.idpartida].tiros.push(tiro);
 	}

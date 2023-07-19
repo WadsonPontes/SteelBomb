@@ -9,8 +9,8 @@ export class Tiro {
 		this.idpartida = idpartida;
 		this.nome = 'SEM NOME';
 		this.imagem = '/asset/tiro.png';
-        this.x = x;
-        this.y = y;
+        this.x = x+7.5;
+        this.y = y+8.5;
 		this.angulo = angulo;
         this.vida_max = 100;
         this.vida_atual = 100;
@@ -32,7 +32,7 @@ export class Tiro {
             this.x -= 20;
         }
 
-        this.vida_atual -= 1;
+        this.vida_atual -= 3;
 
         if (this.vida_atual <= 0) {
             GlobalManager.partidas[this.idpartida].tiros.splice(index, 1);
