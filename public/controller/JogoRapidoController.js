@@ -40,30 +40,30 @@ export class JogoRapidoController {
 			GlobalManager.ctx.save();
 
 			if (person.id == personagem.id) {
-				GlobalManager.ctx.translate(x, y);
+				GlobalManager.ctx.translate(x+25, y+32);
 				GlobalManager.ctx.rotate(angulo);
-				GlobalManager.ctx.translate(-x, -y);
-
 				GlobalManager.ctx.drawImage(
 					person.imagem,
-					x,
-					y,
+					-25,
+					-32,
 					50,
 					64
 				);
+				GlobalManager.ctx.rotate(-angulo);
+				GlobalManager.ctx.translate(-x, -y);
 			}
 			else {
-				GlobalManager.ctx.translate(person.x + x - personagem.x, person.y + y - personagem.y);
+				GlobalManager.ctx.translate(person.x + x - personagem.x+25, person.y + y - personagem.y+32);
 				GlobalManager.ctx.rotate(angulo);
-				GlobalManager.ctx.translate(-person.x - x + personagem.x, -person.y - y + personagem.y);
-
 				GlobalManager.ctx.drawImage(
 					person.imagem,
-					person.x + x - personagem.x,
-					person.y + y - personagem.y,
+					-25,
+					-32,
 					50,
 					64
 				);
+				GlobalManager.ctx.rotate(-angulo);
+				GlobalManager.ctx.translate(-x, -y);
 			}
 
 			GlobalManager.ctx.restore();

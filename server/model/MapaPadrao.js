@@ -11,7 +11,7 @@ export class MapaPadrao extends Mapa {
 
 	getX(id) {
 		if (id == 1) {
-			return 50;
+			return 0;
 		}
 
 		return 0;
@@ -19,7 +19,7 @@ export class MapaPadrao extends Mapa {
 
 	getY(id) {
 		if (id == 1) {
-			return 50;
+			return 0;
 		}
 
 		return 0;
