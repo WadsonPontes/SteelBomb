@@ -4,8 +4,8 @@ import { Tiro } from './Tiro.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class Personagem {
-	constructor(id, idjogador, idpartida, mapa) {
-		this.id = id;
+	constructor(idjogador, idpartida, mapa) {
+		this.id = uuidv4();
         this.idjogador = idjogador;
 		this.idpartida = idpartida;
 		this.nome = 'SEM NOME';
@@ -35,6 +35,6 @@ export class Personagem {
 	}
 
 	morrer() {
-		GlobalManager.partidas[this.idpartida].personagens.splice(this.id, 1);
+		delete GlobalManager.partidas[this.idpartida].personagens[this.id];
 	}
 }
