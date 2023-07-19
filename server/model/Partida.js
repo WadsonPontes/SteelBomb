@@ -9,14 +9,15 @@ export class Partida {
 		this.nome = 'SEM NOME';
         this.mapa = mapa;
         mapa.idpartida = this.id;
-        this.personagens = this.gerarPersonagens(jogadores);
+        this.jogadores = jogadores;
+        this.personagens = this.gerarPersonagens();
 		this.estado = Estado.INICIAL;
 	}
 
-    gerarPersonagens(jogadores) {
+    gerarPersonagens() {
         const personagens = [];
 
-        jogadores.forEach((jogador, index) => {
+        this.jogadores.forEach((jogador, index) => {
             const personagem = new Personagem(index, jogador.id, this.id, this.mapa);
 
             jogador.idpartida = this.id;

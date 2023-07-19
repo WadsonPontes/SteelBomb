@@ -33,4 +33,12 @@ export class ProcurandoJogoRapidoController {
 			
 		}
 	}
+
+	teclou(key) {
+		
+	}
+
+	desteclou(key) {
+		
+	}
 }

@@ -35,11 +35,24 @@ export class GlobalManager {
 		GlobalManager.jogador = instance;
 	}
 
+	static attPartida(partida) {
+		GlobalManager.addPartida(partida);
+	}
+
 	static addPartida(partida) {
 		const instance = Object.assign(new Partida(), partida);
 		instance.mapa = Object.assign(new MapaPadrao(), instance.mapa);
+		const imagem = new Image();
+		imagem.src = instance.mapa.imagem;
+		instance.mapa.imagem = imagem;
+		instance.jogadores.forEach((jogador, index) => {
+			instance.jogadores[index] = Object.assign(new Jogador(), jogador);
+		});
 		instance.personagens.forEach((personagem, index) => {
 			instance.personagens[index] = Object.assign(new Personagem(), personagem);
+			const img = new Image();
+			img.src = instance.personagens[index].imagem;
+			instance.personagens[index].imagem = img;
 		});
 		GlobalManager.partida = instance;
 	}

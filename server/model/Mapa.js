@@ -6,7 +6,7 @@ export class Mapa {
 		this.id = uuidv4();
 		this.idpartida = null;
 		this.nome = 'SEM NOME';
-		this.mapa = [];
+		this.imagem = null;
 		this.estado = Estado.INICIAL;
 	}
 

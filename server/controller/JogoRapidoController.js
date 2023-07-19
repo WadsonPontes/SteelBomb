@@ -15,6 +15,30 @@ export class JogoRapidoController {
         const partida = new Partida(jogadores, mapa);
 		GlobalManager.fila_rapida = [];
         GlobalManager.partidas[partida.id] = partida;
-        MensagemManager.enviarAll('jogoRapidoController', 'iniciar', jogadores, partida)
+        MensagemManager.enviarAll('jogoRapidoController', 'iniciar', partida);
+	}
+
+	teclou(jogador, dados) {
+		const personagem = GlobalManager.partidas[jogador.idpartida].personagens[jogador.idpersonagem];
+		const key = dados.dados;
+		
+		if (key == 'w' || key == 'ArrowUp') {
+			personagem.y -= 10;
+			personagem.angulo = 0;
+		}
+		if (key == 'd' || key == 'ArrowRight') {
+			personagem.x += 10;
+			personagem.angulo = 90;
+		}
+		if (key == 's' || key == 'ArrowDown') {
+			personagem.y += 10;
+			personagem.angulo = 180;
+		}
+		if (key == 'a' || key == 'ArrowLeft') {
+			personagem.x -= 10;
+			personagem.angulo = -90;
+		}
+
+		MensagemManager.enviarAll('jogoRapidoController', 'atualizacao', GlobalManager.partidas[jogador.idpartida]);
 	}
 }

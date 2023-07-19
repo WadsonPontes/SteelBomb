@@ -8,12 +8,13 @@ export class MensagemManager {
 		}));
 	}
 
-	static enviarAll(controller, metodo, jogadores, dados = null) {
-		jogadores.forEach(jogador => {
+	static enviarAll(controller, metodo, partida, dados = null) {
+		partida.jogadores.forEach(jogador => {
 			jogador.ws.send(JSON.stringify({
 				controller,
 				metodo,
 				jogador,
+				partida,
 				dados
 			}));
 		});

@@ -4,6 +4,8 @@ export class Jogador {
 	constructor(ws) {
 		this.ws = ws;
 		this.id = null;
+		this.idpartida = null;
+		this.idpersonagem = null;
 		this.nome = 'SEM NOME';
 		this.estado = Estado.INICIAL;
 	}

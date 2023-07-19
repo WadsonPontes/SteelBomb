@@ -6,8 +6,10 @@ export class Personagem {
         this.idjogador = idjogador;
 		this.idpartida = idpartida;
 		this.nome = 'SEM NOME';
+		this.imagem = null;
         this.x = null;
         this.y = null;
+		this.angulo = 0;
         this.vida_max = 100;
         this.vida_atual = 100;
 		this.estado = Estado.INICIAL;

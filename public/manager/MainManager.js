@@ -22,7 +22,7 @@ export class MainManager {
 		ws.onerror = (erro) => MainManager.erroConexao(erro);
 	}
 
-	static sucessoConexao(jogador, dados) {
+	static sucessoConexao(jogador, partida, dados) {
 		GlobalManager.attJogador(jogador);
 		MainManager.iniciarJogo();
 	}
@@ -31,10 +31,10 @@ export class MainManager {
 		const dados = JSON.parse(raw.data);
 
 		if (dados.controller == 'mainManager') {
-			MainManager[dados.metodo](dados.jogador, dados.dados);
+			MainManager[dados.metodo](dados.jogador, dados.partida, dados.dados);
 		}
 		else {
-			MainManager[dados.controller][dados.metodo](dados.jogador, dados.dados);
+			MainManager[dados.controller][dados.metodo](dados.jogador, dados.partida, dados.dados);
 		}
 	}
 

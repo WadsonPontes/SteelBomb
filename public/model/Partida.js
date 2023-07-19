@@ -7,6 +7,7 @@ export class Partida {
 		this.id = null;
 		this.nome = 'SEM NOME';
         this.mapa = null;
+		this.jogadores = null;
         this.personagens = null;
 		this.estado = Estado.INICIAL;
 	}

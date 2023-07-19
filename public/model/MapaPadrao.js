@@ -5,7 +5,7 @@ import { Mapa } from './Mapa.js';
 export class MapaPadrao extends Mapa {
 	constructor() {
 		super();
-		this.mapa = [];
+		this.imagem = null;
 	}
 
 	getX(id) {

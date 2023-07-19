@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class MapaPadrao extends Mapa {
 	constructor() {
 		super();
-		this.mapa = [];
+		this.imagem = '/asset/city.jpg';
 	}
 
 	getX(id) {

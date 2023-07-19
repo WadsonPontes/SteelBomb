@@ -39,7 +39,15 @@ export class MenuPrincipalController {
 		}
 	}
 
-	procurarJogoRapido() {
+	procurarJogoRapido(jogador, partida, dados) {
 		GlobalManager.mudarTela(new ProcurandoJogoRapidoController());
+	}
+
+	teclou(key) {
+		
+	}
+
+	desteclou(key) {
+		
 	}
 }

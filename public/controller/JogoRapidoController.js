@@ -7,20 +7,66 @@ export class JogoRapidoController {
 	constructor() {
 		this.corFundo = '#141B46';
     	this.componentes = [];
-    	this.componentes.push(new TextoComponent('texto_achou', 'ACHOU', 50, 50, 30));
 	}
 
-	iniciar(jogador, dados) {
+	iniciar(jogador, partida, dados) {
 		GlobalManager.attJogador(jogador);
-		GlobalManager.addPartida(dados);
+		GlobalManager.addPartida(partida);
 		GlobalManager.mudarTela(this);
 	}
 
-	desenhar() {
-		GlobalManager.pintarFundo(this.corFundo);
+	atualizacao(jogador, partida, dados) {
+		GlobalManager.attJogador(jogador);
+		GlobalManager.attPartida(partida);
+	}
 
-		this.componentes.forEach((value) => {
-			value.desenhar();
+	desenhar() {
+		const personagem = GlobalManager.partida.personagens[GlobalManager.jogador.idpersonagem];
+		const x = (window.innerWidth / 2) - 25;
+		const y = (window.innerHeight / 2) - 32;
+
+		GlobalManager.pintarFundo(this.corFundo);
+		GlobalManager.ctx.drawImage(
+			GlobalManager.partida.mapa.imagem,
+			x - personagem.x,
+			y - personagem.y,
+			6000,
+			4500
+		);
+
+		GlobalManager.partida.personagens.forEach((person) => {
+			const angulo = person.angulo * Math.PI / 180;
+
+			GlobalManager.ctx.save();
+
+			if (person.id == personagem.id) {
+				GlobalManager.ctx.translate(x, y);
+				GlobalManager.ctx.rotate(angulo);
+				GlobalManager.ctx.translate(-x, -y);
+
+				GlobalManager.ctx.drawImage(
+					person.imagem,
+					x,
+					y,
+					50,
+					64
+				);
+			}
+			else {
+				GlobalManager.ctx.translate(person.x + x - personagem.x, person.y + y - personagem.y);
+				GlobalManager.ctx.rotate(angulo);
+				GlobalManager.ctx.translate(-person.x - x + personagem.x, -person.y - y + personagem.y);
+
+				GlobalManager.ctx.drawImage(
+					person.imagem,
+					person.x + x - personagem.x,
+					person.y + y - personagem.y,
+					50,
+					64
+				);
+			}
+
+			GlobalManager.ctx.restore();
 		});
   	}
 
@@ -40,5 +86,13 @@ export class JogoRapidoController {
 		if (componente.NOME == '') {
 			
 		}
+	}
+
+	teclou(key) {
+		MensagemManager.enviar('jogoRapidoController', 'teclou', GlobalManager.jogador, key);
+	}
+
+	desteclou(key) {
+		
 	}
 }
