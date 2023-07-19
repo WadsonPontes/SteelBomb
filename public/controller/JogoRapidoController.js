@@ -68,6 +68,26 @@ export class JogoRapidoController {
 
 			GlobalManager.ctx.restore();
 		});
+
+		GlobalManager.partida.tiros.forEach((tiro) => {
+			const angulo = tiro.angulo * Math.PI / 180;
+
+			GlobalManager.ctx.save();
+
+			GlobalManager.ctx.translate(tiro.x + x - personagem.x+7.5, tiro.y + y - personagem.y+8.5);
+			GlobalManager.ctx.rotate(angulo);
+			GlobalManager.ctx.drawImage(
+				tiro.imagem,
+				-7.5,
+				-8.5,
+				15,
+				17
+			);
+			GlobalManager.ctx.rotate(-angulo);
+			GlobalManager.ctx.translate(-x, -y);
+
+			GlobalManager.ctx.restore();
+		});
   	}
 
 	redimensionar() {

@@ -11,17 +11,17 @@ export class MapaPadrao extends Mapa {
 
 	getX(id) {
 		if (id == 1) {
-			return 0;
+			return 5372;
 		}
 
-		return 0;
+		return 1176;
 	}
 
 	getY(id) {
 		if (id == 1) {
-			return 0;
+			return 3596;
 		}
 
-		return 0;
+		return 1497;
 	}
 }

@@ -1,3 +1,4 @@
+import { MainManager } from '../manager/MainManager.js';
 import { GlobalManager } from '../manager/GlobalManager.js';
 import { MensagemManager } from '../manager/MensagemManager.js';
 import { Partida } from '../model/Partida.js';
@@ -16,6 +17,19 @@ export class JogoRapidoController {
 		GlobalManager.fila_rapida = [];
         GlobalManager.partidas[partida.id] = partida;
         MensagemManager.enviarAll('jogoRapidoController', 'iniciar', partida);
+		this.runJogo(partida);
+	}
+
+	runJogo(partida) {
+		MensagemManager.enviarAll('jogoRapidoController', 'atualizacao', partida);
+
+		partida.tiros.forEach((tiro, index) => {
+			tiro.atualizar(index);
+		});
+
+		setTimeout(() => {
+			MainManager.jogoRapidoController.runJogo(partida);
+		}, 17);
 	}
 
 	teclou(jogador, dados) {
@@ -37,6 +51,9 @@ export class JogoRapidoController {
 		if (key == 'a' || key == 'ArrowLeft') {
 			personagem.x -= 10;
 			personagem.angulo = -90;
+		}
+		if (key == ' ' || key == 'Enter') {
+			personagem.atirar();
 		}
 
 		MensagemManager.enviarAll('jogoRapidoController', 'atualizacao', GlobalManager.partidas[jogador.idpartida]);

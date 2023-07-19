@@ -12,6 +12,7 @@ export class Personagem {
 		this.angulo = 0;
         this.vida_max = 100;
         this.vida_atual = 100;
+		this.dano = 10;
 		this.estado = Estado.INICIAL;
 	}
 }

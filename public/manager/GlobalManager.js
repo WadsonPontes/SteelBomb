@@ -4,6 +4,7 @@ import { TextoComponent } from '../component/TextoComponent.js';
 import { Jogador } from '../model/Jogador.js';
 import { Partida } from '../model/Partida.js';
 import { Personagem } from '../model/Personagem.js';
+import { Tiro } from '../model/Tiro.js';
 import { Mapa } from '../model/Mapa.js';
 import { MapaPadrao } from '../model/MapaPadrao.js';
 
@@ -53,6 +54,12 @@ export class GlobalManager {
 			const img = new Image();
 			img.src = instance.personagens[index].imagem;
 			instance.personagens[index].imagem = img;
+		});
+		instance.tiros.forEach((tiro, index) => {
+			instance.tiros[index] = Object.assign(new Tiro(), tiro);
+			const img = new Image();
+			img.src = instance.tiros[index].imagem;
+			instance.tiros[index].imagem = img;
 		});
 		GlobalManager.partida = instance;
 	}

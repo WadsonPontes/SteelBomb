@@ -9,6 +9,7 @@ export class Partida {
         this.mapa = null;
 		this.jogadores = null;
         this.personagens = null;
+		this.tiros = [];
 		this.estado = Estado.INICIAL;
 	}
 }

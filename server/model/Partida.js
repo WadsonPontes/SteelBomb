@@ -11,6 +11,7 @@ export class Partida {
         mapa.idpartida = this.id;
         this.jogadores = jogadores;
         this.personagens = this.gerarPersonagens();
+        this.tiros = [];
 		this.estado = Estado.INICIAL;
 	}
 
