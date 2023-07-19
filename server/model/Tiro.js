@@ -45,7 +45,8 @@ export class Tiro {
         const partida = GlobalManager.partidas[this.idpartida];
 
         partida.personagens.forEach((personagem) => {
-            if (this.x > personagem.x 
+            if (this.idjogador != personagem.idjogador
+                && this.x > personagem.x 
                 && this.y > personagem.y
                 && this.x < personagem.x + 50
                 && this.y < personagem.y + 64

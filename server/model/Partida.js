@@ -22,9 +22,9 @@ export class Partida {
             const personagem = new Personagem(index, jogador.id, this.id, this.mapa);
 
             jogador.idpartida = this.id;
-            jogador.idpersonagem = index;
+            jogador.idpersonagem = personagem.id;
 
-            personagens.push(personagem);
+            personagens[personagem.id] = personagem;
         });
 
         return personagens;

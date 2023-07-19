@@ -22,6 +22,7 @@ export class JogoRapidoController {
 
 	desenhar() {
 		const personagem = GlobalManager.partida.personagens[GlobalManager.jogador.idpersonagem];
+		console.log(GlobalManager.partida);
 		const x = (window.innerWidth / 2) - 25;
 		const y = (window.innerHeight / 2) - 32;
 

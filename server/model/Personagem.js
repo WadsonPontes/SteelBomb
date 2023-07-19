@@ -4,14 +4,15 @@ import { Tiro } from './Tiro.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class Personagem {
-	constructor(idjogador, idpartida, mapa) {
+	constructor(posicao, idjogador, idpartida, mapa) {
 		this.id = uuidv4();
+		this.posicao = posicao;
         this.idjogador = idjogador;
 		this.idpartida = idpartida;
 		this.nome = 'SEM NOME';
-		this.imagem = `/asset/${id}.png`;
-        this.x = mapa.getX(id);
-        this.y = mapa.getY(id);
+		this.imagem = `/asset/${posicao}.png`;
+        this.x = mapa.getX(posicao);
+        this.y = mapa.getY(posicao);
 		this.angulo = 0;
         this.vida_max = 50;
         this.vida_atual = 50;
@@ -34,7 +35,7 @@ export class Personagem {
 		}
 	}
 
-	morrer() {
+	morrer() {console.log('horer');
 		delete GlobalManager.partidas[this.idpartida].personagens[this.id];
 	}
 }

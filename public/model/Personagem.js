@@ -1,8 +1,9 @@
 import { Estado } from '../enum/Estado.js';
 
 export class Personagem {
-	constructor(idjogador, idpartida) {
+	constructor(posicao, idjogador, idpartida) {
 		this.id = null;
+		this.posicao = posicao;
         this.idjogador = idjogador;
 		this.idpartida = idpartida;
 		this.nome = 'SEM NOME';
