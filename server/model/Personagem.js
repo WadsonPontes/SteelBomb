@@ -13,8 +13,8 @@ export class Personagem {
         this.x = mapa.getX(id);
         this.y = mapa.getY(id);
 		this.angulo = 0;
-        this.vida_max = 100;
-        this.vida_atual = 100;
+        this.vida_max = 50;
+        this.vida_atual = 50;
 		this.dano = 10;
 		this.ultimo_tiro = Date.now();
 		this.estado = Estado.INICIAL;
@@ -24,5 +24,18 @@ export class Personagem {
 		this.ultimo_tiro = Date.now();
 		const tiro = new Tiro(this.idjogador, this.idpartida, this.x, this.y, this.angulo, this.dano);
 		GlobalManager.partidas[this.idpartida].tiros.push(tiro);
+	}
+
+	tomarDano(dano) {
+		this.vida_atual -= dano;
+
+		if (this.vida_atual <= 0) {
+			this.morrer();
+		}
+	}
+
+	morrer() {
+		console.log('morreu');
+		GlobalManager.partidas[this.idpartida].personagens.splice(this.id, 1);
 	}
 }

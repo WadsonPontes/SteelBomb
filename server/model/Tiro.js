@@ -37,5 +37,24 @@ export class Tiro {
         if (this.vida_atual <= 0) {
             GlobalManager.partidas[this.idpartida].tiros.splice(index, 1);
         }
+
+        this.checaColisao(index);
 	}
+
+    checaColisao(index) {
+        const partida = GlobalManager.partidas[this.idpartida];
+
+        partida.personagens.forEach((personagem) => {
+            if (this.x > personagem.x 
+                && this.y > personagem.y
+                && this.x < personagem.x + 50
+                && this.y < personagem.y + 64
+            ) {
+                console.log(`x: ${this.x} y: ${this.y}`);
+                console.log(personagem);
+                personagem.tomarDano(this.dano);
+                partida.tiros.splice(index, 1);
+            }
+        });
+    }
 }
