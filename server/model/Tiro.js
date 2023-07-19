@@ -50,8 +50,6 @@ export class Tiro {
                 && this.x < personagem.x + 50
                 && this.y < personagem.y + 64
             ) {
-                console.log(`x: ${this.x} y: ${this.y}`);
-                console.log(personagem);
                 personagem.tomarDano(this.dano);
                 partida.tiros.splice(index, 1);
             }

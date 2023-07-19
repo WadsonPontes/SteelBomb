@@ -35,7 +35,6 @@ export class Personagem {
 	}
 
 	morrer() {
-		console.log('morreu');
 		GlobalManager.partidas[this.idpartida].personagens.splice(this.id, 1);
 	}
 }
