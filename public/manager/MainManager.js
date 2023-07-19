@@ -61,5 +61,5 @@ export class MainManager {
 		window.requestAnimationFrame(MainManager.runJogo);
 	}
 }
-
+console.log('versao 1');
 MainManager.novaConexao(`wss://${location.host}`);

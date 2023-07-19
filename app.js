@@ -27,7 +27,13 @@ app.get('*', (req, res) => {
 });
  
 const server = app.listen(process.env.PORT || 4200, () => console.log('Servidor online!'));
-const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-const wss = new WebSocketServer({ server, clientTracking: true, perMessageDeflate: false, path: '/wss' });
+const wss = new WebSocketServer({
+  server,
+  verifyClient: (info, cb) => {
+    const protocol = info.req.headers['x-forwarded-proto'] === 'https' ? 'wss' : 'ws';
+    info.req.protocol = protocol;
+    cb(true);
+  },
+});
 
 wss.on('connection', (sock, req) => MainManager.novaConexao(sock, req));
