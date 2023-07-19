@@ -28,6 +28,6 @@ app.get('*', (req, res) => {
  
 const server = app.listen(process.env.PORT || 4200, () => console.log('Servidor online!'));
 const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-const wss = new WebSocketServer({ server, clientTracking: true, perMessageDeflate: false, path: '/ws' });
+const wss = new WebSocketServer({ server, clientTracking: true, perMessageDeflate: false, path: '/wss' });
 
 wss.on('connection', (sock, req) => MainManager.novaConexao(sock, req));
