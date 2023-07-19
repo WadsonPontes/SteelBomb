@@ -2,17 +2,22 @@ import { MenuPrincipalController } from '../controller/MenuPrincipalController.j
 import { ProcurandoJogoRapidoController } from '../controller/ProcurandoJogoRapidoController.js';
 import { TextoComponent } from '../component/TextoComponent.js';
 import { Jogador } from '../model/Jogador.js';
+import { Partida } from '../model/Partida.js';
+import { Personagem } from '../model/Personagem.js';
+import { Mapa } from '../model/Mapa.js';
+import { MapaPadrao } from '../model/MapaPadrao.js';
 
 export class GlobalManager {
 	static canvas = null;
 	static ctx = null;
 	static jogador = null;
 	static tela = null;
+	static partida = null;
 
-	static iniciar() {
+	static iniciar(ws) {
 		GlobalManager.canvas = document.querySelector('canvas');
 		GlobalManager.ctx = GlobalManager.canvas.getContext('2d');
-		GlobalManager.jogador = new Jogador();
+		GlobalManager.jogador = new Jogador(ws);
 		GlobalManager.tela = new MenuPrincipalController();
 	}
 
@@ -25,8 +30,18 @@ export class GlobalManager {
 	}
 
 	static attJogador(jogador) {
-		jogador.ws = GlobalManager.jogador.ws;
-		GlobalManager.jogador = jogador;
+		const instance = Object.assign(new Jogador(), jogador);
+		instance.ws = GlobalManager.jogador.ws;
+		GlobalManager.jogador = instance;
+	}
+
+	static addPartida(partida) {
+		const instance = Object.assign(new Partida(), partida);
+		instance.mapa = Object.assign(new MapaPadrao(), instance.mapa);
+		instance.personagens.forEach((personagem, index) => {
+			instance.personagens[index] = Object.assign(new Personagem(), personagem);
+		});
+		GlobalManager.partida = instance;
 	}
 
 	static limparTela() {

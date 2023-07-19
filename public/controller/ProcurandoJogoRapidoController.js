@@ -23,8 +23,14 @@ export class ProcurandoJogoRapidoController {
 	clicou(event) {
 		this.componentes.forEach((value) => {
 			if (GlobalManager.contido(event.clientX, event.clientY, value)) {
-				value.clicou(event);
+				this.clicouComponente(event, value);
 			}
 		});
+	}
+
+	clicouComponente(event, componente) {
+		if (componente.NOME == '') {
+			
+		}
 	}
 }

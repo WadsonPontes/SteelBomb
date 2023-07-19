@@ -33,7 +33,7 @@ export class MenuPrincipalController {
 	clicouComponente(event, componente) {
 		if (componente.NOME == 'botao_jogo_rapido') {
 			MensagemManager.enviar(
-				'MenuPrincipalController',
+				'menuPrincipalController',
 				'procurarJogoRapido'
 			);
 		}

@@ -1,23 +1,21 @@
-import { Jogador } from '../model/Jogador.js';
-
 export class MensagemManager {
-	constructor() {
-
-	}
-
-	static getInstance() {
-		if (!MensagemManager.instance) {
-			MensagemManager.instance = new MensagemManager();
-		}
-		return MensagemManager.instance;
-	}
-
-	enviar(controller, metodo, jogador, dados) {
+	static enviar(controller, metodo, jogador, dados = null) {
 		jogador.ws.send(JSON.stringify({
 			controller,
 			metodo,
 			jogador,
 			dados
 		}));
+	}
+
+	static enviarAll(controller, metodo, jogadores, dados = null) {
+		jogadores.forEach(jogador => {
+			jogador.ws.send(JSON.stringify({
+				controller,
+				metodo,
+				jogador,
+				dados
+			}));
+		});
 	}
 }

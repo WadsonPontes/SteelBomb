@@ -1,22 +1,19 @@
-import { Jogador } from '../model/Jogador.js';
+import { MainManager } from './MainManager.js';
 
 export class GlobalManager {
-	constructor() {
-		this.jogadores = [];
+	static jogadores = [];
+	static fila_rapida = [];
+	static partidas = [];
+
+	static addJogador(jogador) {
+		GlobalManager.jogadores[jogador.id] = jogador;
 	}
 
-	static getInstance() {
-		if (!GlobalManager.instance) {
-			GlobalManager.instance = new GlobalManager();
-		}
-		return GlobalManager.instance;
+	static delJogador(jogador) {
+		delete GlobalManager.jogadores[jogador.id];
 	}
 
-	addJogador(jogador) {
-		this.jogadores[jogador.ws] = jogador;
-	}
-
-	delJogador(jogador) {
-		delete this.jogadores[jogador.ws];
+	static addFilaRapida(jogador) {
+		GlobalManager.fila_rapida.push(jogador);
 	}
 }

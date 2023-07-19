@@ -1,7 +1,5 @@
-class MainController {
+export class MainController {
 	constructor() {
 		
 	}
 }
-
-module.exports = MainController;

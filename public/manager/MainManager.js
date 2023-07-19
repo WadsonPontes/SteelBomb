@@ -1,21 +1,28 @@
 import { GlobalManager } from './GlobalManager.js';
 import { MensagemManager } from './MensagemManager.js';
 import { EventoManager } from './EventoManager.js';
+import { MenuPrincipalController } from '../controller/MenuPrincipalController.js';
+import { ProcurandoJogoRapidoController } from '../controller/ProcurandoJogoRapidoController.js';
+import { JogoRapidoController } from '../controller/JogoRapidoController.js';
+
 
 export class MainManager {
+	static menuPrincipalController = new MenuPrincipalController();
+	static procurandoJogoRapidoController = new ProcurandoJogoRapidoController();
+	static jogoRapidoController = new JogoRapidoController();
+
 	static novaConexao(url) {
 		const ws = new WebSocket(url);
 
-		GlobalManager.iniciar();
+		GlobalManager.iniciar(ws);
 		EventoManager.iniciar();
-		GlobalManager.addWs(ws);
-
+		
 		ws.onmessage = (raw) => MainManager.novaMensagem(raw);
 		ws.onclose = (id, descricao) => MainManager.fechadaConexao(id, descricao);
 		ws.onerror = (erro) => MainManager.erroConexao(erro);
 	}
 
-	static sucessoConexao(jogador) {
+	static sucessoConexao(jogador, dados) {
 		GlobalManager.attJogador(jogador);
 		MainManager.iniciarJogo();
 	}
@@ -27,7 +34,7 @@ export class MainManager {
 			MainManager[dados.metodo](dados.jogador, dados.dados);
 		}
 		else {
-			this[dados.controller][dados.metodo](dados.jogador, dados.dados);
+			MainManager[dados.controller][dados.metodo](dados.jogador, dados.dados);
 		}
 	}
 
