@@ -62,4 +62,4 @@ export class MainManager {
 	}
 }
 
-MainManager.novaConexao(`wss://${location.host}`);
+MainManager.novaConexao(`ws://${location.host}`);
